@@ -1,0 +1,15 @@
+#lang sicp
+(define (sine radians)
+  (define (cube x)
+    (* x x x)
+    )
+  (define (sine-expansion x)
+    (- (* 3 (sine (/ x 3)))
+       (* 4 (sine (cube (/ x 3))))
+       )
+    )
+  (if (< radians 0.001)
+      radians
+      (sine-expansion radians)
+      )
+  )
