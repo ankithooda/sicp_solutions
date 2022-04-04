@@ -1,0 +1,16 @@
+#lang racket
+(define (smallest a b)
+  (if (< a b)
+      a
+      b))
+
+(define (sq a)
+  (* a a))
+  
+(define (sos a b c)
+  (define small (smallest (smallest a b) c))
+  (cond ((= small a) (+ (sq c) (sq b)))
+        ((= small b) (+ (sq a) (sq c)))
+        ((= small c) (+ (sq a) (sq b)))
+        (else -1)
+  ))

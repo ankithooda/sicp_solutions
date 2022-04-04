@@ -1,0 +1,13 @@
+#lang sicp
+(define (queens board-size)
+  (define (queen-cols k)
+    (if (= k 0)
+        (list empty-board)
+        (filter (lambda (positions)
+                  (safe? k positions))
+                (flatmap (lambda (rest-of-queens)
+                           (map (lambda (new-row)
+                                  (adjoin-positions new-row k rest-of-queens))
+                                (enumerate 1 board-size)))
+                         (queen-cols (- k 1))))))
+  (queen-cols board-size))

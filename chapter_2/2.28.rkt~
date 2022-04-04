@@ -1,0 +1,8 @@
+#lang racket
+(define (fringe tree)
+  (define nil `())
+  (define (iter leaves tree)
+    (cond ((null? tree) nil)
+          ((not (pair? tree)) tree)
+          (else 
+          

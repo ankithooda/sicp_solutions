@@ -1,0 +1,6 @@
+#lang sicp
+
+(define (make-table)
+  (let ((local-table (list `*table*)))
+    
+    (define (assoc key-1
