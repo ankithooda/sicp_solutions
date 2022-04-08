@@ -1,14 +1,7 @@
 #lang racket
 
-(define (sqrt-iter guess x)
-  (if (good-enough? guess x)
-      guess
-      (sqrt-iter (improve guess x)
-                 x)))
+; Helper functions
 
-(define (sqrt x)
-  (sqrt-iter 1.0 x))
-  
 (define (square x)
   (* x x))
 
@@ -20,11 +13,30 @@
       (* -1 x)
       x))
 
+; If guess is good-enough?
+; return guess
+; otherwise improve guess
+(define (sqrt-iter guess x)
+  (if (good-enough? guess x)
+      guess
+      (sqrt-iter (improve guess x)
+                 x)))
+
+(define (sqrt x)
+  (sqrt-iter 1.0 x))
+  
 (define (good-enough? guess x)
-  (define tolerance 0.000000000000000000000000000001)
-  (< (abs (- (square guess) x))
-     tolerance))
+  (= (improve guess x) guess))
 
 (define (improve guess x)
   (average guess (/ x guess)))
 
+
+(define (improve-until-equal guess x)
+  (let ((new-guess (average guess (/ x guess))))
+    (if (< (abs (- new-guess guess)) 1)
+        (begin
+          (display new-guess)
+          (newline)
+          (display guess))
+        (improve-until-equal new-guess x))))
